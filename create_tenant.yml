@@ -1,0 +1,5 @@
+---
+- name: Create AP under specified tenant
+  hosts: apic
+  connection: local
+  gather_facts: false

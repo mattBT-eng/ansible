@@ -1,0 +1,40 @@
+---
+- name: Create EPG and link it to BD and physical domain
+  hosts: apic
+  connection: local
+  gather_facts: false
+
+  tasks:
+  - name: sdagfsdg
+    aci_ap:
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      state: "present"
+      validate_certs: false
+      tenant: "{{ tenant }}"
+    aci_epg:
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      tenant: "{{ tenant }}"
+      ap: "{{ ap }}"
+      epg: "{{ epg }}"
+      description: "{{ epg_description }}"
+      bd: "{{ bd }}"
+      preferred_group: "{{ preferred_group }}"
+      state: present
+      validate_certs: false
+    aci_epg_to_domain:
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      tenant: "{{ tenant }}"
+      ap: "{{ ap }}"
+      epg: "{{ epg }}"
+      domain: "{{ domain }}"
+      domain_type: "{{ domain_type }}"
+      state: present
+      validate_certs: false
+
+    delegate_to: localhost
