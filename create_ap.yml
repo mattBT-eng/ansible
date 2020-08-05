@@ -6,8 +6,9 @@
 
 
   tasks:
-  - name: sdagfsdg
+  - name: Create AP
     aci_ap:
+      ap: "{{ ap }}"
       host: "{{ inventory_hostname }}"
       username: "{{ username }}"
       password: "{{ password }}"
