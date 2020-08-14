@@ -16,7 +16,7 @@
   tasks:
     - name: Create tenant
       aci_tenant:
-        host: "{{ inventory_hostname }}"
+        host: "{{ apic }}"
         username: "{{ username }}"
         password: "{{ password }}"
         state: "{{ state }}"
