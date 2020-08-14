@@ -1,0 +1,76 @@
+---
+- name:
+  hosts: apic
+  connection: local
+  gather_facts: False
+
+  vars:
+    tenant: "Ansible_test_tenant"
+    ap: "Ansible_AP"
+    epg: "Ansible_EPG"
+    bd: "Ansible_BD"
+    vrf: "Ansible_VRF"
+    state: "absent"
+
+
+  tasks:
+    - name: Create tenant
+      aci_tenant:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        state: "{{ state }}"
+        validate_certs: False 
+        tenant: "{{ tenant }}"
+        description: Tenant created with playbook
+    - name: Create AP
+      aci_ap:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ tenant }}"
+        ap: "{{ ap }}"
+        state: "{{ state }}"
+        validate_certs: False 
+        description: AP for web app
+      delegate_to: localhost
+    - name: Create VRF
+      aci_vrf:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ tenant }}"
+        vrf: "{{ vrf }}"
+        policy_control_preference: enforced
+        policy_control_direction: ingress
+        state: "{{ state }}"
+        validate_certs: False 
+        description: Main VRF
+      delegate_to: localhost
+    - name: Create BD
+      aci_bd:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ tenant }}"
+        bd: "{{ bd }}"
+        vrf: "{{ vrf }}"
+        mac_address: 00:22:VD:F8:19:FE
+        state: "{{ state }}"
+        validate_certs: False 
+        description: BD for VLAN 150
+      delegate_to: localhost
+    - name: Create EPG
+      aci_epg:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: "{{ tenant }}"
+        ap: "{{ ap }}"
+        bd: "{{ bd }}"
+        epg: "{{ epg }}"
+        state: "{{ state }}"
+        preferred_group: yes
+        validate_certs: False 
+        description: EPG for VLAN 150
+      delegate_to: localhost
