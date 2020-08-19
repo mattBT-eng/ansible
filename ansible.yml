@@ -25,7 +25,7 @@
         description: Tenant created with playbook
     - name: Create AP
       aci_ap:
-        host: "{{ inventory_hostname }}"
+        host: "{{ apic }}"
         username: "{{ username }}"
         password: "{{ password }}"
         tenant: "{{ tenant }}"
@@ -36,7 +36,7 @@
       delegate_to: localhost
     - name: Create VRF
       aci_vrf:
-        host: "{{ inventory_hostname }}"
+        host: "{{ apic }}"
         username: "{{ username }}"
         password: "{{ password }}"
         tenant: "{{ tenant }}"
@@ -49,7 +49,7 @@
       delegate_to: localhost
     - name: Create BD
       aci_bd:
-        host: "{{ inventory_hostname }}"
+        host: "{{ apic }}"
         username: "{{ username }}"
         password: "{{ password }}"
         tenant: "{{ tenant }}"
@@ -62,7 +62,7 @@
       delegate_to: localhost
     - name: Create EPG
       aci_epg:
-        host: "{{ inventory_hostname }}"
+        host: "{{ apic }}"
         username: "{{ username }}"
         password: "{{ password }}"
         tenant: "{{ tenant }}"
