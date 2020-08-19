@@ -10,7 +10,7 @@
     epg: "Ansible_EPG"
     bd: "Ansible_BD"
     vrf: "Ansible_VRF"
-    state: "absent"
+    state: "present"
 
 
   tasks:
